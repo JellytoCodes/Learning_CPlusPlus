@@ -1,83 +1,17 @@
-﻿#include <iostream>
-#include <vector>
+﻿#include "Custom.h"
 
-using namespace std;
+void PracticeVector();
+void PracticeList();
 
-template<typename T>
-class Vector
-{
-public :
-	Vector()
-	{
-	
-	}
-
-	~Vector()
-    {
-		if (_data) delete[] _data;
-    }
-
-    void push_back(const T& value)
-    {
-	    if (_size == _capacity)
-	    {
-		    // 증설 작업
-            int newCapacity = static_cast<int>(_capacity * 1.5);
-            if (newCapacity == _capacity) newCapacity++;
-
-            reserve(newCapacity);
-	    }
-
-		// 데이터 저장
-		_data[_size] = value;
-
-		_size++;
-    }
-
-	void reserve(int capacity)
-    {
-		if (_capacity >= capacity) return;
-
-        _capacity = capacity;
-
-        T* newData = new T[_capacity];
-
-        // 데이터 복사
-        for (int i = 0 ; i < _size ; i++) newData[i] = _data[i];
-
-        if (_data) delete[] _data;
-
-        _data = newData;
-    }
-
-    T& operator[](const int pos) { return _data[pos]; }
-
-    int size()      { return _size; }
-    int capacity()  { return _capacity; }
-
-    void clear()
-    {
-		if (_data)
-		{
-			delete[] _data;
-            _data = new T[_capacity];
-		}
-
-	    _size = 0;
-    }
-
-private :
-	T*          _data = nullptr;
-
-    // 현재 데이터의 총 개수
-    int         _size = 0;
-
-    // 할당받은 데이터의 총 크기
-    int         _capacity = 0;
-};
 int main()
 {
-    vector<int> v;
+	//PracticeVector();
+    PracticeList();
+}
+
+void PracticeVector()
+{
+	vector<int> v;
 
     v.reserve(100);
 
@@ -91,6 +25,33 @@ int main()
     cout << v.size() << " " << v.capacity() << "\n";
 
     v.clear();
-    // size는 초기화되나 capacity는 초기화되지 않음
+    
     cout << v.size() << " " << v.capacity() << "\n";
+}
+
+void PracticeList()
+{
+    List<int> li;
+
+    List<int>::iterator eraseIt;
+
+    for (int i = 0 ; i < 10 ; i++)
+    {
+        if (i == 5)
+        {
+	        eraseIt= li.insert(li.end(), i);
+        }
+        else
+        {
+			li.push_back(i);    
+        }
+    }
+
+    li.pop_back();
+
+	// 리스트의 삽입/삭제가 빠른 것은 조건부이다.
+	// 삭제가 빠른 경우는 지우고자하는 데이터를 이미 갖고 있는 경우 빠르게 삭제가 가능하다.
+    li.erase(eraseIt);
+
+    for (auto it = li.begin() ; it != li.end() ; ++it) cout << (*it) << "\n";
 }
