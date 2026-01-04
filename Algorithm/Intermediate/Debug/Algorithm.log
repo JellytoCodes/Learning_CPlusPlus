@@ -1,0 +1,15 @@
+﻿  Algorithm.cpp
+D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Algorithm\Custom.h(296,37): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  (compiling source file 'Algorithm.cpp')
+      D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Algorithm\Custom.h(296,37):
+      the template instantiation context (the oldest one first) is
+          D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Algorithm\Algorithm.cpp(58,13):
+          see reference to class template instantiation 'Stack<int,std::vector<int,std::allocator<int>>>' being compiled
+          D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Algorithm\Custom.h(296,6):
+          while compiling class template member function 'int Stack<int,std::vector<int,std::allocator<int>>>::size(void)'
+              D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Algorithm\Algorithm.cpp(76,14):
+              see the first reference to 'Stack<int,std::vector<int,std::allocator<int>>>::size' in 'PracticeStack'
+  
+  Custom.cpp
+  Generating Code...
+  Algorithm.vcxproj -> D:\Dev\Programming_Study\Learning_C++\Learning_CPlusPlus\Algorithm\Binaries\Algorithm.exe

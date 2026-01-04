@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <stack>
 
 using namespace std;
 
@@ -260,4 +261,43 @@ private :
     // 리스트의 끝
     Node<T>*    _tail;
     int         _size;
+};
+
+template<typename T, typename Container = vector<T>>
+class Stack
+{
+public :
+	void push(const T& value)
+	{
+		_container.push_back(value);
+	}
+
+	/*
+	 * C#에서의 pop 방식을 사용하지 않는 이유는 성능과 예외 처리 관련 때문이다.
+	 * 경우에 따라 T타입 자체가 복사가 굉장히 무겁고 느릴 수 있기 때문에 동작에 문제가 생길 수 있기 때문이다.
+	 *	T pop()
+	 *	{
+	 *		T ret = _data[_size - 1];
+	 *		_size--;
+	 *		return ret;
+	 *	}
+	 **/
+
+	void pop()
+	{
+		_container.pop_back();
+	}
+
+	T& top()
+	{
+		return _container.back();
+	}
+	bool empty() { return _container.empty(); }
+	int size() { return _container.size(); }
+private :
+	// 동적 배열과 연결 리스트의 구성은 어느정도 비슷하기 때문에 둘 다 사용이 가능하다.
+	// vector<T> _container;
+	// list<T> _container;
+	Container _container;
+
 };

@@ -2,11 +2,13 @@
 
 void PracticeVector();
 void PracticeList();
+void PracticeStack();
 
 int main()
 {
 	//PracticeVector();
-    PracticeList();
+    //PracticeList();
+    PracticeStack();
 }
 
 void PracticeVector()
@@ -37,14 +39,9 @@ void PracticeList()
 
     for (int i = 0 ; i < 10 ; i++)
     {
-        if (i == 5)
-        {
-	        eraseIt= li.insert(li.end(), i);
-        }
-        else
-        {
-			li.push_back(i);    
-        }
+        if (i == 5)     eraseIt = li.insert(li.end(), i);
+        else            li.push_back(i);
+        
     }
 
     li.pop_back();
@@ -54,4 +51,27 @@ void PracticeList()
     li.erase(eraseIt);
 
     for (auto it = li.begin() ; it != li.end() ; ++it) cout << (*it) << "\n";
+}
+
+void PracticeStack()
+{
+	Stack<int> s;
+
+    // 삽입
+    s.push(1);
+    s.push(2);
+    s.push(3);
+
+    while (s.empty() == false)
+    {
+		// 최상위 원소
+	    int data = s.top();
+
+	    // 최상위 원소 삭제
+	    s.pop();
+
+        cout << data << "\n";
+    }
+
+    int size = s.size();
 }
