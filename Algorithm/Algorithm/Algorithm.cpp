@@ -3,12 +3,14 @@
 void PracticeVector();
 void PracticeList();
 void PracticeStack();
+void PracticeQueue();
 
 int main()
 {
 	//PracticeVector();
     //PracticeList();
-    PracticeStack();
+    //PracticeStack();
+    PracticeQueue();
 }
 
 void PracticeVector()
@@ -33,9 +35,9 @@ void PracticeVector()
 
 void PracticeList()
 {
-    List<int> li;
+    list<int> li;
 
-    List<int>::iterator eraseIt;
+    list<int>::iterator eraseIt;
 
     for (int i = 0 ; i < 10 ; i++)
     {
@@ -55,7 +57,7 @@ void PracticeList()
 
 void PracticeStack()
 {
-	Stack<int> s;
+	stack<int> s;
 
     // 삽입
     s.push(1);
@@ -73,5 +75,21 @@ void PracticeStack()
         cout << data << "\n";
     }
 
-    int size = s.size();
+    size_t size = s.size();
+}
+
+void PracticeQueue()
+{
+	ArrayQueue<int> q;
+
+    for (int i = 0; i < 100 ; i++) q.push(i);
+
+    while (q.empty() == false)
+    {
+	    int value = q.front();
+        q.pop();
+        cout << value << "\n";
+    }
+
+    size_t size = q.size();
 }

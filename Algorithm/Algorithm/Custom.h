@@ -4,82 +4,25 @@
 #include <vector>
 #include <list>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
-template<typename T>
-class Vector
-{
-public :
-	Vector()
-	{
-	
-	}
-
-	~Vector()
-    {
-		if (_data) delete[] _data;
-    }
-
-    void push_back(const T& value)
-    {
-	    if (_size == _capacity)
-	    {
-		    // 증설 작업
-            int newCapacity = static_cast<int>(_capacity * 1.5);
-            if (newCapacity == _capacity) newCapacity++;
-
-            reserve(newCapacity);
-	    }
-
-		// 데이터 저장
-		_data[_size] = value;
-
-		_size++;
-    }
-
-	void reserve(int capacity)
-    {
-		if (_capacity >= capacity) return;
-
-        _capacity = capacity;
-
-        T* newData = new T[_capacity];
-
-        // 데이터 복사
-        for (int i = 0 ; i < _size ; i++) newData[i] = _data[i];
-
-        if (_data) delete[] _data;
-
-        _data = newData;
-    }
-
-    T& operator[](const int pos) { return _data[pos]; }
-
-    // size는 초기화되나 capacity는 초기화되지 않는 차이를 확실하게 알고 넘어가야한다.
-    int size()      { return _size; }
-    int capacity()  { return _capacity; }
-
-    void clear()
-    {
-		if (_data)
-		{
-			delete[] _data;
-            _data = new T[_capacity];
-		}
-
-	    _size = 0;
-    }
-
-private :
-	T*          _data = nullptr;
-
-    // 현재 데이터의 총 개수
-    int         _size = 0;
-
-    // 할당받은 데이터의 총 크기
-    int         _capacity = 0;
-};
+/**
+ * push_back		O(1)
+ * 중간 삽입/삭제	O(N)
+ * 임의 접근		O(1)
+ * [ ] [ ] [ ] [ ]
+ * 동적 배열
+ *
+ * 삽입/삭제		O(1)
+ * 임의 접근		O(N)
+ * [ ]<->[ ]<->[ ]<->[ ]
+ * 연결 리스트 (양방향 / 단방향)
+ *
+ * 스택(LIFO)	O(1) 
+ * 큐(FIFO)		O(1)
+ */
 
 template<typename T>
 class Node
@@ -160,6 +103,80 @@ public :
 	{
 		return _node != other._node;
 	}
+};
+
+template<typename T>
+class Vector
+{
+public :
+	Vector()
+	{
+	
+	}
+
+	~Vector()
+    {
+		if (_data) delete[] _data;
+    }
+
+    void push_back(const T& value)
+    {
+	    if (_size == _capacity)
+	    {
+		    // 증설 작업
+            int newCapacity = static_cast<int>(_capacity * 1.5);
+            if (newCapacity == _capacity) newCapacity++;
+
+            reserve(newCapacity);
+	    }
+
+		// 데이터 저장
+		_data[_size] = value;
+
+		_size++;
+    }
+
+	void reserve(int capacity)
+    {
+		if (_capacity >= capacity) return;
+
+        _capacity = capacity;
+
+        T* newData = new T[_capacity];
+
+        // 데이터 복사
+        for (int i = 0 ; i < _size ; i++) newData[i] = _data[i];
+
+        if (_data) delete[] _data;
+
+        _data = newData;
+    }
+
+    T& operator[](const int pos) { return _data[pos]; }
+
+    // size는 초기화되나 capacity는 초기화되지 않는 차이를 확실하게 알고 넘어가야한다.
+    int size()      { return _size; }
+    int capacity()  { return _capacity; }
+
+    void clear()
+    {
+		if (_data)
+		{
+			delete[] _data;
+            _data = new T[_capacity];
+		}
+
+	    _size = 0;
+    }
+
+private :
+	T*          _data = nullptr;
+
+    // 현재 데이터의 총 개수
+    int         _size = 0;
+
+    // 할당받은 데이터의 총 크기
+    int         _capacity = 0;
 };
 
 template<typename  T>
@@ -300,4 +317,87 @@ private :
 	// list<T> _container;
 	Container _container;
 
+};
+
+template<typename  T>
+class ListQueue
+{
+public :
+	void push(const T& value)
+	{
+		_container.push_back(value);
+	}
+
+	void pop()
+	{
+		_container.pop_front();
+	}
+
+	T& front()
+	{
+		return _container.front();
+	}
+
+	bool empty() { return _container.empty(); }
+	int size() { return _container.size(); }
+private :
+	list<T> _container;
+};
+
+template<typename  T>
+class ArrayQueue
+{
+	// vector<T>를 이용하여
+	// front / back의 위치를 변경하는 순환 구조를 이용하여 Queue로 만드는 방식이다.
+public :
+	ArrayQueue()
+	{
+		_container.resize(100);
+	}
+
+	void push(const T& value)
+	{
+		// TODO : 다 찼는지 체크
+		if (_size == _container.size())
+		{
+			// 증설 작업
+			int newSize = max(1, _size * 2);
+			vector<T> newData;
+			newData.resize(newSize);
+
+			// 데이터 복사
+			for (int i = 0 ; i < _size ; i++)
+			{
+				int index = (_front + i) % _container.size();
+				newData[i] = _container[index];
+			}
+			_container.swap(newData);
+			_front = 0;
+			_back = _size;
+		}
+
+		_container[_back] = value;
+		_back = (_back + 1) % _container.size();
+		_size++;
+	}
+
+	void pop()
+	{
+		_front = (_front + 1) % _container.size();
+		_size--;
+	}
+
+	T& front()
+	{
+		return _container[_front];
+	}
+
+	bool empty() { return _size == 0; }
+	int size() { return _size; }
+private :
+	vector<T> _container;
+
+	int _front	= 0;
+	int _back	= 0;
+	int _size	= 0;
 };
