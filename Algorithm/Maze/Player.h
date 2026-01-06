@@ -16,8 +16,9 @@ public :
 	Pos GetPos() const { return _pos;}
 
 	bool CanGo(Pos pos);
-
 private :
+	void RightHand();
+	void BFS();
 
 	Pos		_pos = {};
 	int32	_dir = DIR_UP;

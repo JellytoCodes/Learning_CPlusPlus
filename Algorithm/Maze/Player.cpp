@@ -5,32 +5,59 @@
 
 #include "Board.h"
 
-void Player::Init(Board* board)
+void Player::Init(Board *board)
 {
 	_pos = board->GetEnterPos();
 	_board = board;
 
+	//RightHand();
+	BFS();
+}
+
+void Player::Update(uint64 deltaTick)
+{
+	if(_pathIndex >= _path.size())
+		return;
+
+	_sumTick += deltaTick;
+	if(_sumTick >= MOVE_TICK)
+	{
+		_sumTick = 0;
+
+		_pos = _path[_pathIndex];
+		_pathIndex++;
+	}
+}
+
+bool Player::CanGo(Pos pos)
+{
+	TileType tileType = _board->GetTileType(pos);
+	return tileType == TileType::EMPTY;
+}
+
+void Player::RightHand()
+{
 	Pos pos = _pos;
 
 	_path.clear();
 	_path.push_back(pos);
 
 	// 목적지 도착하기 전에는 계속 실행
-	Pos dest = board->GetExitPos();
+	Pos dest = _board->GetExitPos();
 
 	Pos front[4] =
 	{
-		Pos { -1, 0},	// UP
-		Pos { 0, -1},	// LEFT
-		Pos { 1, 0},	// DOWN
-		Pos { 0, 1},	// RIGHT
+		Pos{-1, 0},	// UP
+		Pos{0, -1},	// LEFT
+		Pos{1, 0},	// DOWN
+		Pos{0, 1},	// RIGHT
 	};
 
-	while (pos != dest)
+	while(pos != dest)
 	{
 		// 1. 현재 바라보는 방향을 기준으로 오른쪽으로 갈 수 있는지 확인.
 		int32 newDir = (_dir - 1 + DIR_COUNT) % DIR_COUNT;
-		if (CanGo(pos + front[newDir]))
+		if(CanGo(pos + front[newDir]))
 		{
 			// 오른쪽 방향으로 90도 회전.
 			_dir = newDir;
@@ -40,7 +67,7 @@ void Player::Init(Board* board)
 			_path.push_back(pos);
 		}
 		// 2. 현재 바라보는 방향을 기준으로 전진할 수 있는지 확인.
-		else if (CanGo(pos + front[_dir]))
+		else if(CanGo(pos + front[_dir]))
 		{
 			// 앞으로 한 보 전진.
 			pos += front[_dir];
@@ -56,17 +83,17 @@ void Player::Init(Board* board)
 
 	stack<Pos> s;
 
-	for (int i = 0; i < _path.size() - 1 ; i++)
+	for(int i = 0; i < _path.size() - 1; i++)
 	{
-		if (s.empty() == false && s.top() == _path[i + 1])	s.pop();
+		if(s.empty() == false && s.top() == _path[i + 1])	s.pop();
 		else												s.push(_path[i]);
 	}
 
 	// 목적지 도착
-	if (_path.empty() == false) s.push(_path.back());
+	if(_path.empty() == false) s.push(_path.back());
 
 	vector<Pos> path;
-	while (s.empty() == false)
+	while(s.empty() == false)
 	{
 		path.push_back(s.top());
 		s.pop();
@@ -77,23 +104,70 @@ void Player::Init(Board* board)
 	_path = path;
 }
 
-void Player::Update(uint64 deltaTick)
+void Player::BFS()
 {
-	if (_pathIndex >= _path.size())
-		return;
+	Pos pos = _pos;
 
-	_sumTick += deltaTick;
-	if (_sumTick >= MOVE_TICK)
+	// 목적지 도착하기 전에는 계속 실행
+	Pos dest = _board->GetExitPos();
+
+	Pos front[4] =
 	{
-		_sumTick = 0;
+		Pos{-1, 0},	// UP
+		Pos{0, -1},	// LEFT
+		Pos{1, 0},	// DOWN
+		Pos{0, 1},	// RIGHT
+	};
 
-		_pos = _path[_pathIndex];
-		_pathIndex++;
+	const int32 mapSize = _board->GetSize();
+	vector<vector<bool>> discovered(mapSize, vector<bool>(mapSize, false));
+
+	//vector<vector<Pos>> parent;
+	// parent[A] = B : A는 B로 인해 발견함
+	map<Pos, Pos> parent;
+
+	queue<Pos> q;
+	q.push(pos);
+	discovered[pos.x][pos.y] = true;
+	parent[pos] = pos;
+
+	while(q.empty() == false)
+	{
+		pos = q.front();
+		q.pop();
+
+		// 방문
+		if(pos == dest) break;
+
+		for(int dir = 0; dir < 4; dir++)
+		{
+			Pos nextPos = pos + front[dir];
+
+			// 갈 수 있는 지역이 맞는가?
+			if(CanGo(nextPos) == false) continue;
+
+			// 이미 발견한 지역인가?
+			if(discovered[nextPos.x][nextPos.y]) continue;
+
+			q.push(nextPos);
+			discovered[nextPos.x][nextPos.y] = true;
+			parent[nextPos] = pos;
+		}
 	}
-}
 
-bool Player::CanGo(Pos pos)
-{
-	TileType tileType = _board->GetTileType(pos);
-	return tileType == TileType::EMPTY;
+	_path.clear();
+
+	// 거꾸로 거슬러 올라가기
+	pos = dest;
+
+	while(true)
+	{
+		_path.push_back(pos);
+
+		// 시작점은 자신이 곧 부모이다.
+		if(pos == parent[pos]) break;
+
+		pos = parent[pos];
+	}
+	std::reverse(_path.begin(), _path.end());
 }
