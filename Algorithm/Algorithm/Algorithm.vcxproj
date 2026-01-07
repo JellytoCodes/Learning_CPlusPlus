@@ -132,10 +132,12 @@
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="GraphCustom.cpp" />
     <ClCompile Include="LinearCustom.cpp" />
+    <ClCompile Include="TreeCustom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphCustom.h" />
     <ClInclude Include="LinearCustom.h" />
+    <ClInclude Include="TreeCustom.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

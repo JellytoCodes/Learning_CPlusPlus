@@ -1,9 +1,10 @@
-﻿#include "GraphCustom.h"
+﻿#include "TreeCustom.h"
 
 int main()
 {
-	Dijkstra dij;
+	Tree tree;
+	NodeRef ref = tree.CreateTree();
+	tree.PrintTree(ref, 0);
 
-	dij.CreateGraph();
-	dij.DijkstraHere(0);
+	cout << tree.GetHeight(ref) << "\n";
 }
