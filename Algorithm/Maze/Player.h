@@ -8,6 +8,7 @@ class Player
 	{
 		MOVE_TICK = 100
 	};
+
 public :
 	void Init(Board* board);
 	void Update(uint64 deltaTick);
@@ -19,6 +20,7 @@ public :
 private :
 	void RightHand();
 	void BFS();
+	void AStar();
 
 	Pos		_pos = {};
 	int32	_dir = DIR_UP;
