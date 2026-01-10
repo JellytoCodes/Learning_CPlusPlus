@@ -1,22 +1,20 @@
-﻿#include <queue>
-
-#include "TreeCustom.h"
+﻿#include "SearchTree.h"
 
 int main()
 {
-	PriorityQueue<int, vector<int>, greater<int>> pq;
+	BinarySearchTree bst;
 
-	pq.push(100);
-	pq.push(300);
-	pq.push(200);
-	pq.push(500);
-	pq.push(400);
+	bst.Insert(20);
+	bst.Insert(10);
+	bst.Insert(30);
+	bst.Insert(25);
+	bst.Insert(40);
+	bst.Insert(26);
+	bst.Insert(50);
+	bst.Insert(1);
 
-	while (pq.empty() == false)
-	{
-		int value = pq.top();
-		pq.pop();
+	bst.Delete(20);
+	bst.Delete(26);
 
-		cout << value << "\n";
-	}
+	bst.Print();
 }

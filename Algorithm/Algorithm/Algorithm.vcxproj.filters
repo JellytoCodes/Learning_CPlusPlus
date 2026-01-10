@@ -6,27 +6,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LinearCustom.cpp">
+    <ClCompile Include="Linear.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Algorithm.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="GraphCustom.cpp">
+    <ClCompile Include="Graph.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="TreeCustom.cpp">
+    <ClCompile Include="Tree.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchTree.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GraphCustom.h">
+    <ClInclude Include="Graph.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="LinearCustom.h">
+    <ClInclude Include="Linear.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="TreeCustom.h">
+    <ClInclude Include="Tree.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchTree.h">
       <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>

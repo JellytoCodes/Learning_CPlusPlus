@@ -243,7 +243,9 @@ void Player::AStar()
 	priority_queue<PQNode, vector<PQNode>, greater<PQNode>> pq;
 
 	// 1) 예약(발견) 시스템 구현
+	// - 이미 더 좋은 경로를 찾았다면 스킵
 	// 2) 뒤늦게 더 좋은 경로가 발견될 수 있음 (예외 처리 필수)
+	// - openList에서 찾아서 제거하거나, pg에서 pop한 다음에 제거하거나
 
 	// 초기값
 	{
