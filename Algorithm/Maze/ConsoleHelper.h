@@ -9,6 +9,7 @@ enum class ConsoleColor
 	YELLOW = RED | GREEN,
 	WHITE = RED | GREEN | BLUE,
 };
+
 class ConsoleHelper
 {
 public :
