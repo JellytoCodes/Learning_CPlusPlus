@@ -21,6 +21,7 @@
     <ClCompile Include="SearchTree.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="Sort.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
@@ -35,5 +36,6 @@
     <ClInclude Include="SearchTree.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="Sort.h" />
   </ItemGroup>
 </Project>

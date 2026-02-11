@@ -1,38 +1,22 @@
 ﻿#include <iostream>
 #include <thread>
 
-#include "SearchTree.h"
-
-using namespace std;
+#include "Sort.h"
 
 int main()
 {
-	BinarySearchTree bst;
+	vector<int> v;
 
-	bst.Insert(30);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
+	srand(time(0));
 
-	bst.Insert(10);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
+	for (int i = 0 ; i < 10 ; i++)
+	{
+		int randValue = rand() % 100;
+		v.push_back(randValue);
+	}
 
-	bst.Insert(20);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
-
-	bst.Insert(25);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
-
-	bst.Delete(20);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
-
-	bst.Delete(10);
-	bst.Print();
-	this_thread::sleep_for(std::chrono::seconds(1));
-
+	// MergeSort(v, 0, v.size()-1);
+	Sort::QuickSort(v, 0, v.size() - 1);
 	/*
 	int a = 0;
 	srand((unsigned int)&a);

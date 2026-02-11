@@ -133,12 +133,14 @@
     <ClCompile Include="SearchTree.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Linear.cpp" />
+    <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SearchTree.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Linear.h" />
+    <ClInclude Include="Sort.h" />
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
