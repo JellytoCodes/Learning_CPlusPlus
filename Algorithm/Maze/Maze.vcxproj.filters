@@ -25,6 +25,9 @@
     <ClCompile Include="Board.cpp">
       <Filter>Main\Board</Filter>
     </ClCompile>
+    <ClCompile Include="DisjointSet.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -39,5 +42,6 @@
     <ClInclude Include="Board.h">
       <Filter>Main\Board</Filter>
     </ClInclude>
+    <ClInclude Include="DisjointSet.h" />
   </ItemGroup>
 </Project>

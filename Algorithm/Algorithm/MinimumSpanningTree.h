@@ -48,10 +48,10 @@ struct Node
 	Node* leader;
 };
 
-class NaiveDisjoinSet
+class NaiveDisjointSet
 {
 public :
-	NaiveDisjoinSet(int n)
+	NaiveDisjointSet(int n)
 		: _parent(n)
 	{
 		for (int i = 0 ; i < n ; i++)
