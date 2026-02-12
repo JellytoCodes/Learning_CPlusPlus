@@ -21,9 +21,15 @@
     <ClCompile Include="SearchTree.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Sort.cpp" />
-    <ClCompile Include="HashTable.cpp" />
-    <ClCompile Include="MinimumSpanningTree.cpp" />
+    <ClCompile Include="Sort.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MinimumSpanningTree.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="HashTable.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
@@ -38,8 +44,14 @@
     <ClInclude Include="SearchTree.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="Sort.h" />
-    <ClInclude Include="HashTable.h" />
-    <ClInclude Include="MinimumSpanningTree.h" />
+    <ClInclude Include="Sort.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="HashTable.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="MinimumSpanningTree.h">
+      <Filter>Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
