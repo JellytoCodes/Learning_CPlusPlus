@@ -23,6 +23,7 @@
     </ClCompile>
     <ClCompile Include="Sort.cpp" />
     <ClCompile Include="HashTable.cpp" />
+    <ClCompile Include="MinimumSpanningTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
@@ -39,5 +40,6 @@
     </ClInclude>
     <ClInclude Include="Sort.h" />
     <ClInclude Include="HashTable.h" />
+    <ClInclude Include="MinimumSpanningTree.h" />
   </ItemGroup>
 </Project>
