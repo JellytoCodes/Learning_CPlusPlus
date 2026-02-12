@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithm.cpp" />
+    <ClCompile Include="HashTable.cpp" />
     <ClCompile Include="SearchTree.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Linear.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HashTable.h" />
     <ClInclude Include="SearchTree.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Linear.h" />

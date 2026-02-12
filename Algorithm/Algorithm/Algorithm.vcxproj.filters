@@ -22,6 +22,7 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="Sort.cpp" />
+    <ClCompile Include="HashTable.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graph.h">
@@ -37,5 +38,6 @@
       <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="Sort.h" />
+    <ClInclude Include="HashTable.h" />
   </ItemGroup>
 </Project>
