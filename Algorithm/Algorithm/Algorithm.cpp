@@ -4,41 +4,68 @@
 #include <vector>
 using namespace std;
 
-// LIS (Longest Increasing Sequence)
-int cache[100];
-vector<int> seq;
+// TRIANGLE_PATH
+// - (0, 0)부터 시작해서 아래 or 아래우측으로 이동 가능
+// - 만나는 숫자를 모두 더함
+// - 더한 숫자가 최대가 되는 경로의 합
 
-int LIS(int pos)
+int N;
+vector<vector<int>> board;
+vector<vector<int>> cache;
+vector<vector<int>> nextX;
+
+int Path(int x, int y)
 {
 	// 기저 사항
-	//if (pos == seq.size() - 1)
-	//	return 1;
+	if (x == N)
+		return 0;
 
 	// 캐시 확인
-	int& ret = cache[pos];
+	int& ret = cache[x][y];
 	if (ret != -1)
 		return ret;
 
-	// 구하기
-
-	// 최소 seq[pos]은 있으니 1부터 시작
-	ret = 1;
-
-	for (int next = pos + 1 ; next < seq.size() ; next++)
+	// 경로 기록
 	{
-		if (seq[pos] < seq[next])
-			ret = max(ret, 1 + LIS(next));
+		int nextBottom = Path(x + 1, y);
+		int nextBottomRight = Path(x + 1, y + 1);
+		if (nextBottom > nextBottomRight)
+			nextX[x][y] = x;
+		else
+			nextX[x][y] = x + 1;
 	}
 
-	return ret;
+	// 적용
+	return ret = board[x][y] + max(Path(x + 1, y), Path(x + 1, y + 1));
 }
 
 int main()
 {
-	::memset(cache, -1, sizeof(cache));
-	seq = vector<int>{10, 1, 9, 2, 5, 7};
+	board = vector<vector<int>>
+	{
+		{6},
+		{1, 2},
+		{3, 7, 4},
+		{9, 4, 1, 7},
+		{2, 7, 5, 9, 4}
+	};
 
-	int ret = 0;
-	for (int pos = 0 ; pos < seq.size() ; pos++)
-		ret = max(ret, LIS(0));
+	N = board.size();
+	cache = vector<vector<int>>(N, vector<int>(N, -1));
+	nextX = vector<vector<int>>(N, vector<int>(N));
+
+	int ret = Path(0, 0);
+	cout << ret << endl;
+
+	// 경로 만들기
+	int x = 0;
+	int y = 0;
+
+	while (x < N)
+	{
+		cout << board[x][y] << " -> ";
+
+		y = nextX[x][y];
+		x++;
+	}
 }
